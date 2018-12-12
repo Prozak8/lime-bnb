@@ -41,8 +41,9 @@ export class MeetingFormComponent implements OnInit {
       this.office_hour_start,
       this.office_hour_end,
       this.meeting_duration)
-      .subscribe(res => {
-        this.suggestions = res["suggestions"];
-    })
+      .subscribe(res => 
+        this.suggestions = res["suggestions"],
+        error => this.errorMsg = error
+    )
   }
 }

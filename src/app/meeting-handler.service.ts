@@ -11,7 +11,7 @@ export class MeetingHandlerService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  getListOfEmployees(query: string = 'An') {
+  getListOfEmployees(query: string = '') {
     return this._httpClient.get(`${this.meetingUrl}/employees?q=${query}`)
       .pipe(catchError(this.errorHandler));
   } 
@@ -24,6 +24,7 @@ export class MeetingHandlerService {
                             meeting_length: string = '') {
                               
     return this._httpClient.get(`${this.meetingUrl}/suggestions?employees=${employee_id}&fromDate=${from_date}&toDate=${to_date}&officehoursStart=${office_hour_start}%3A00&officehoursEnd=${office_hour_end}%3A00&meetingLength=${meeting_length}`)
+    .pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error: HttpErrorResponse) {
