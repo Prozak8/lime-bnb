@@ -1,0 +1,137 @@
+<form 
+  class="container" 
+  style="border-style: solid; 
+  border-width: 2px; 
+  margin-top: 5%;
+  background-color: white;">
+  
+  <div class="form"
+    style="padding: 3%;">
+    <h2>Meeting Planner</h2>
+    <h3>{{ errorMsg }}</h3>
+    <hr>
+    <div class="row-inline">
+      <div class="form-group mb-2 col-xs-4">
+        <label  
+          for="search_input">
+          Search Employees
+        </label>
+        <input 
+          type="text" 
+          name="search_input" 
+          [(ngModel)]="search_input" 
+          class="form-control" 
+          placeholder="Randall">
+      </div>
+        <button 
+          (click)="searchEmployees()" 
+          class="btn btn-primary col-xs-1">
+          Search
+        </button>
+    </div>
+
+    <div class="form-group col-md-5">
+      <label>
+        Employee Select:
+      </label>
+      <select 
+        [(ngModel)]="employee_id" 
+        name="employee_id" 
+        class="form-control">
+        <option 
+          *ngFor="let employee of employees"
+          value="{{employee.id}}">
+          {{ employee.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label 
+          for="from-date">
+          From:
+        </label>
+        <input 
+          type="date" 
+          name="from-date"
+          [(ngModel)]="from_date"
+          class="form-control" 
+          max="2015-01-31">
+      </div>
+
+      <div class="form-group col-xs-4">
+        <label 
+          for="to-date">
+          To:
+        </label>
+        <input 
+          type="date" 
+          name="to-date"
+          [(ngModel)]="to_date"
+          class="form-control" 
+          max="2015-01-31">
+      </div>
+    </div>
+
+    <div class="form-group col-xs-4">
+      <label>
+        Office Hours Starting:
+      </label>
+      <select 
+      [(ngModel)]="office_hour_start" 
+      name="office_hour_start"
+      class="form-control">
+        <option 
+          *ngFor="let time of times"
+          value="{{time.v}}">
+          {{ time.i }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group col-xs-4">
+      <label 
+        for="office-end">
+        Office Hours End:
+      </label>
+      <select 
+        [(ngModel)]="office_hour_end" 
+        class="form-control" 
+        name="office_hour_end">
+        <option 
+          *ngFor="let time of times"
+          value="{{ time.v }}">
+          {{ time.i }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group col-xs-4">
+      <label 
+        for="meeting-duration">
+        Duration (minutes):
+      </label>
+      <select 
+        [(ngModel)]="meeting_duration" 
+        class="form-control" 
+        name="meeting_duration">
+        <option 
+          *ngFor="let minute of minutes"
+          value="{{ minute.half_hour }}">
+          {{ minute.half_hour }}
+        </option>
+      </select> 
+    </div>
+
+    <button 
+      (click)="submitMeetingRequirements()" 
+      class="btn btn-success">
+      Suggest Meeting
+    </button>
+  </div>
+</form>
+
+<ng-container class="container" *ngFor="let suggestion of suggestions">
+  <div app-meeting-suggestion [suggestion]="suggestion"></div>
+</ng-container>
